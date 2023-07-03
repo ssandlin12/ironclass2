@@ -38,7 +38,9 @@ app.locals.appTitle = `${capitalize(projectName)} created with IronLauncher`;
 
 // 👇 Start handling routes here
 const indexRoutes = require("./routes/index.routes");
+const apiRoutes = require("./routes/youtube.api.routes");
 app.use("/", indexRoutes);
+app.use("/", apiRoutes);
 
 const authRouter = require("./routes/auth.routes"); // <== has to be added
 app.use("/", authRouter);
