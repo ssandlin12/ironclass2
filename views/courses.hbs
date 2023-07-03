@@ -1,19 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<div class="relative isolate px-6 pt-14 lg:px-8">
 
 <ul>
-
-    {{#each video }}
+   {{#each video }}
 
     <li>
         <p>Name: {{this.snippet.title}}</p>
-        {{!-- <p>Video ID: {{this.id.videoId}}</p> --}}
         <p>Channel: {{this.snippet.channelTitle}}</p>
         <img src="{{this.snippet.thumbnails.high.url}}">
         <a href="/video/{{this.id.videoId}}"><button>View</button></a>
@@ -22,35 +13,26 @@
     {{/each}}
 
     {{#each video1}}
-    
+
     <li>
         <p>Name: {{this.snippet.title}}</p>
-        {{!-- <p>Video ID: {{this.id.videoId}}</p> --}}
         <p>Channel: {{this.snippet.channelTitle}}</p>
         <img src="{{this.snippet.thumbnails.high.url}}">
         <a href="/video/{{this.id.videoId}}"><button>View</button></a>
-    
+
     </li>
     {{/each}}
 
     {{#each video2}}
-    
+
     <li>
         <p>Name: {{this.snippet.title}}</p>
-        {{!-- <p>Video ID: {{this.id.videoId}}</p> --}}
         <p>Channel: {{this.snippet.channelTitle}}</p>
         <img src="{{this.snippet.thumbnails.high.url}}">
         <a href="/video/{{this.id.videoId}}"><button>View</button></a>
-    
+
     </li>
     {{/each}}
-
 </ul>
 
-
-
-
-
-    
-</body>
-</html>
+</div>

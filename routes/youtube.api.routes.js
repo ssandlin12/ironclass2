@@ -35,7 +35,7 @@ routerOne.get("/courses", (req, res) => {
        res.render("courses", { video, video1, video2 });
     })
 
-  
+
     .catch((error) => {
       console.error("Error searching videos:", error);
       res.status(500).send("An error occurred");
