@@ -8,12 +8,23 @@ require("./db");
 // Handles http requests (express is node js framework)
 // https://www.npmjs.com/package/express
 const express = require("express");
+const path = require("path");
 
 // Handles the handlebars
 // https://www.npmjs.com/package/hbs
 const hbs = require("hbs");
 
 const app = express();
+
+// Specify the directory where the static files are located
+const publicDirectoryPath = path.join(__dirname, "public");
+const distDirectoryPath = path.join(publicDirectoryPath, "dist");
+
+// Serve static files from the public directory
+app.use(express.static(publicDirectoryPath));
+
+// Serve static files from the dist directory
+app.use("/dist", express.static(distDirectoryPath));
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
