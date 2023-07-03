@@ -6,20 +6,20 @@ const User = require("../models/User.model");
 const mongoose = require("mongoose");
 
 //Get
-router.get("/signup", (req, res) => res.render("auth/signup"));
+router.get("/signup", (req, res) => res.render("signup"));
 //get userprofile
 router.get("/userProfile", (req, res) => {
   res.render("users/user-profile", { userInSession: req.session.currentUser });
 });
 //get login
-router.get("/login", (req, res) => res.render("auth/login"));
+router.get("/login", (req, res) => res.render("login"));
 //postlogin
 router.post("/login", (req, res, next) => {
   console.log("SESSION =====> ", req.session);
   const { email, password } = req.body;
 
   if (email === "" || password === "") {
-    res.render("auth/login", {
+    res.render("login", {
       errorMessage: "Please enter both, email and password to login.",
     });
     return;
@@ -29,7 +29,7 @@ router.post("/login", (req, res, next) => {
     .then((user) => {
       if (!user) {
         console.log("Email not registered. ");
-        res.render("auth/login", {
+        res.render("login", {
           errorMessage: "User not found and/or incorrect password.",
         });
         return;
@@ -42,7 +42,7 @@ router.post("/login", (req, res, next) => {
         res.redirect("/userProfile");
       } else {
         console.log("Incorrect password. ");
-        res.render("auth/login", {
+        res.render("login", {
           errorMessage: "User not found and/or incorrect password.",
         });
       }
@@ -55,7 +55,7 @@ router.post("/signup", (req, res, next) => {
 
   // make sure users fill all mandatory fields:
   if (!firstName || !lastName || !email || !password) {
-    res.render("auth/signup", {
+    res.render("signup", {
       errorMessage:
         "All fields are mandatory. Please provide your firstName and lastName, email and password.",
     });
@@ -64,7 +64,7 @@ router.post("/signup", (req, res, next) => {
   //pass
   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
   if (!regex.test(password)) {
-    res.status(500).render("auth/signup", {
+    res.status(500).render("signup", {
       errorMessage:
         "Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.",
     });
@@ -92,13 +92,13 @@ router.post("/signup", (req, res, next) => {
     })
     .catch((error) => {
       if (error instanceof mongoose.Error.ValidationError) {
-        res.status(500).render("auth/signup", { errorMessage: error.message });
+        res.status(500).render("signup", { errorMessage: error.message });
       } else if (error.code === 11000) {
         console.log(
           " firstName and lastName and email need to be unique. Either firstName and lastName or email is already used. "
         );
 
-        res.status(500).render("auth/signup", {
+        res.status(500).render("signup", {
           errorMessage: "User not found and/or incorrect password.",
         });
       } else {
