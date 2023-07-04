@@ -1278,6 +1278,10 @@ select {
   min-height: 100%;
 }
 
+.w-24 {
+  width: 6rem;
+}
+
 .w-5 {
   width: 1.25rem;
 }
@@ -2582,6 +2586,10 @@ select {
 
 .pt-14 {
   padding-top: 3.5rem;
+}
+
+.pt-2 {
+  padding-top: 0.5rem;
 }
 
 .text-left {
