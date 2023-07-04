@@ -2,6 +2,8 @@
 // https://www.npmjs.com/package/dotenv
 require("dotenv").config();
 
+const session = require("express-session");
+
 // ℹ️ Connects to the database
 require("./db");
 
