@@ -12,6 +12,9 @@ const Youtube = new apiService(key);
 const Youtube1 = new apiService(key);
 const Youtube2 = new apiService(key);
 
+
+
+
 routerOne.get("/courses", (req, res) => {
 
   const searchThis = "Learn React With This One Project";
@@ -46,21 +49,13 @@ routerOne.get("/courses", (req, res) => {
 
 routerOne.get("/courses/:videoId", (req, res) => {
   const { videoId } = req.params;
-
-  //console.log(videoId);
-
+  //res.render("view-course");
   const showThisVideo = Youtube.loadVideoById(videoId);
 
   showThisVideo
-
     .then((video) => {
-
-  
       const myVideo = video.data.items[0].id;
-
-      console.log( myVideo);
-
-      res.render("view_course", { myVideo });
+      res.render("view-course", { myVideo });
     })
 
     .catch((error) => {
@@ -68,7 +63,6 @@ routerOne.get("/courses/:videoId", (req, res) => {
       res.status(500).send("An error occurred");
     });
 });
-
 
 
 
