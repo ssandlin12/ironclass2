@@ -3,7 +3,7 @@
 
 const apiService = require("../services/api.services");
 const { Router } = require("express");
-const routerOne = new Router();
+const router = new Router();
 
 
 
@@ -12,7 +12,10 @@ const routerOne = new Router();
 // const Youtube1 = new apiService(key);
 // const Youtube2 = new apiService(key);
 
-routerOne.get("/courses", (req, res) => {
+
+
+
+router.get("/courses", (req, res) => {
 
   const searchThis = "Learn React With This One Project";
   const searchThis1 = "100+ JavaScript Concepts you Need to Know";
@@ -29,8 +32,8 @@ routerOne.get("/courses", (req, res) => {
         const video2 = result[1].data.items;
         const video1 = result[2].data.items;
 
-          console.log(video1);
-          console.log(video2);
+          //console.log(video1);
+          //console.log(video2);
 
        res.render("courses", { video, video1, video2 });
     })
@@ -44,5 +47,31 @@ routerOne.get("/courses", (req, res) => {
 
 
 
+router.get("/courses/:videoId", (req, res) => {
+  const { videoId } = req.params;
+  //res.render("view-course");
+  const showThisVideo = Youtube.loadVideoById(videoId);
 
-module.exports = routerOne;
+  showThisVideo
+    .then((video) => {
+      const myVideo = video.data.items[0].id;
+      res.render("view-course", { myVideo });
+    })
+
+    .catch((error) => {
+      console.error("Error displaying your video:", error);
+      res.status(500).send("An error occurred");
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+module.exports = router;
