@@ -7,12 +7,15 @@ const mongoose = require("mongoose");
 
 //Get
 router.get("/signup", (req, res) => res.render("signup"));
+
 //get userprofile
 router.get("/userProfile", (req, res) => {
   res.render("users/user-profile", { userInSession: req.session.currentUser });
 });
+
 //get login
 router.get("/login", (req, res) => res.render("login"));
+
 //postlogin
 router.post("/login", (req, res, next) => {
   console.log("SESSION =====> ", req.session);
@@ -88,6 +91,7 @@ router.post("/signup", (req, res, next) => {
     })
     .then((userFromDB) => {
       // console.log('Newly created user is: ', userFromDB);
+      req.session.currentUser = userFromDB;
       res.redirect("/userProfile");
     })
     .catch((error) => {
