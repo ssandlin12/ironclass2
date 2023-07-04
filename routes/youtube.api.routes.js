@@ -29,8 +29,8 @@ routerOne.get("/courses", (req, res) => {
         const video2 = result[1].data.items;
         const video1 = result[2].data.items;
 
-          console.log(video1);
-          console.log(video2);
+          //console.log(video1);
+          //console.log(video2);
 
        res.render("courses", { video, video1, video2 });
     })
@@ -41,6 +41,41 @@ routerOne.get("/courses", (req, res) => {
       res.status(500).send("An error occurred");
     });
 });
+
+
+
+routerOne.get("/courses/:videoId", (req, res) => {
+  const { videoId } = req.params;
+
+  //console.log(videoId);
+
+  const showThisVideo = Youtube.loadVideoById(videoId);
+
+  showThisVideo
+
+    .then((video) => {
+
+  
+      const myVideo = video.data.items[0].id;
+
+      console.log( myVideo);
+
+      res.render("view_course", { myVideo });
+    })
+
+    .catch((error) => {
+      console.error("Error displaying your video:", error);
+      res.status(500).send("An error occurred");
+    });
+});
+
+
+
+
+
+
+
+
 
 
 
