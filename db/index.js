@@ -1,19 +1,21 @@
-// ℹ️ package responsible to make the connection with mongodb
-// https://www.npmjs.com/package/mongoose
 const mongoose = require("mongoose");
 
 // ℹ️ Sets the MongoDB URI for our app to have access to it.
 // If no env has been set, we dynamically set it to whatever the folder name was upon the creation of the app
 
-const MONGO_URI =
-  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/ironclass2";
+const dbUrl =
+  "mongodb+srv://Ironclass2:WUa8SqDJxsplfxB1@cluster0.mbodwq0.mongodb.net/";
+
+const connectionParams = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+};
 
 mongoose
-  .connect(MONGO_URI)
-  .then((x) => {
-    const databaseName = x.connections[0].name;
-    console.log(`Connected to Mongo! Database name: "${databaseName}"`);
+  .connect(dbUrl, connectionParams)
+  .then(() => {
+    console.log("Database connected");
   })
-  .catch((err) => {
-    console.error("Error connecting to mongo: ", err);
+  .catch((error) => {
+    console.log("Error:", error);
   });

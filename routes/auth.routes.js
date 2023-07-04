@@ -41,7 +41,7 @@ router.post("/login", (req, res, next) => {
         req.session.currentUser = user;
         res.redirect("/userProfile");
       } else {
-        console.log("Incorrect password. ");
+        console.log("Incorrect password.");
         res.render("login", {
           errorMessage: "User not found and/or incorrect password.",
         });
