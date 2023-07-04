@@ -3,7 +3,7 @@
 
 const apiService = require("../services/api.services");
 const { Router } = require("express");
-const routerOne = new Router();
+const router = new Router();
 
 
 
@@ -15,7 +15,7 @@ const Youtube2 = new apiService(key);
 
 
 
-routerOne.get("/courses", (req, res) => {
+router.get("/courses", (req, res) => {
 
   const searchThis = "Learn React With This One Project";
   const searchThis1 = "100+ JavaScript Concepts you Need to Know";
@@ -47,7 +47,7 @@ routerOne.get("/courses", (req, res) => {
 
 
 
-routerOne.get("/courses/:videoId", (req, res) => {
+router.get("/courses/:videoId", (req, res) => {
   const { videoId } = req.params;
   //res.render("view-course");
   const showThisVideo = Youtube.loadVideoById(videoId);
@@ -74,4 +74,4 @@ routerOne.get("/courses/:videoId", (req, res) => {
 
 
 
-module.exports = routerOne;
+module.exports = router;
