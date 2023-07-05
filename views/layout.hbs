@@ -45,19 +45,24 @@
         </div>
         <div class="hidden lg:flex lg:gap-x-12">
           <a
-            href="#"
-            class="text-sm pt-2 font-semibold leading-6 text-gray-900"
-          >Videos</a>
-          <a
-            href="#"
+            href="/dummyCourses"
             class="text-sm pt-2 font-semibold leading-6 text-gray-900"
           >Courses</a>
-          <a href="#" class="text-sm pt-2 font-semibold leading-6 text-gray-900">Meet
-            the Teachers</a>
+          <a
+            href="/curriculum"
+            class="text-sm pt-2 font-semibold leading-6 text-gray-900"
+          >Curriculum</a>
+          <a
+            href="/meet-teachers"
+            class="text-sm pt-2 font-semibold leading-6 text-gray-900"
+          >Meet the Teachers</a>
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
           {{#if userInSession}}
-            <div class="w-24 h-6">
+            <div class="lg:flex lg:gap-x-8 w-32 h-6">
+              <a href="/userProfile">
+                <img src="/images/profile.svg" />
+              </a>
               <form action="/logout" method="post">
                 <button
                   type="submit"
@@ -66,7 +71,7 @@
               </form>
             </div>
           {{else}}
-            <div class="w-24 h-6">
+            <div class="w-32 h-6">
               <button
                 onclick="window.location.href='/login'"
                 class="w-full h-full text-sm font-semibold leading-6 text-gray-900"
@@ -85,7 +90,7 @@
         >
           <div class="flex items-center justify-between">
             <a href="#" class="-m-1.5 p-1.5">
-              <span class="sr-only">Your Company</span>
+              <span class="sr-only">Ironclass</span>
               <img class="h-8 w-auto" src="/images/logo.svg" alt="" />
             </a>
             <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
@@ -112,11 +117,11 @@
                 <a
                   href="#"
                   class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >Videos</a>
+                >Courses</a>
                 <a
                   href="#"
                   class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >Courses</a>
+                >Curriculum</a>
                 <a
                   href="#"
                   class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
@@ -149,6 +154,8 @@
     </header>
 
     {{{body}}}
+
+    <div class="h-40"></div>
 
     <script src="/js/script.js"></script>
   </body>

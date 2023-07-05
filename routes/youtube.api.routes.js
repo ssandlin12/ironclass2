@@ -67,6 +67,7 @@ router.get("/courses/:videoId", (req, res) => {
 
 
 
+
 ////////////////////////////////////Adding to favorites////////////////////////////////////////
 const mongoose = require("mongoose");
 const Video = require("../models/Video.model");
@@ -105,10 +106,6 @@ const favVideo = Youtube.loadVideoById(videoId);
       res.status(500).send("An error occurred");
     });
 });  
-
-
-
-
 
 
 
