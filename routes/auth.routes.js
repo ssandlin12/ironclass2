@@ -20,8 +20,9 @@ router.get("/login", (req, res) => res.render("login"));
 router.post("/login", (req, res, next) => {
   console.log("SESSION =====> ", req.session);
   const { email, password } = req.body;
-
+  
   if (email === "" || password === "") {
+     req.session.userId = userId;
     res.render("login", {
       errorMessage: "Please enter both, email and password to login.",
     });
