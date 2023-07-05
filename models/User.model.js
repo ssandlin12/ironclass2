@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 const userSchema = new mongoose.Schema({
   firstName: {
     type: String,
@@ -20,6 +21,13 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "Password is required."],
   },
+
+  videos: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Video",
+    },
+  ],
   //   courses: {
   //     enrolled: [
   //       {

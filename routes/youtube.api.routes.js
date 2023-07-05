@@ -16,7 +16,9 @@ const Youtube2 = new apiService(key);
 
 
 router.get("/courses", (req, res) => {
-
+  if(!req.session.currentUser) {
+    res.redirect("/dummyCourses")
+  }
   const searchThis = "Learn React With This One Project";
   const searchThis1 = "100+ JavaScript Concepts you Need to Know";
   const searchThis2 = "How to Code: Rectangular Collision Detection with JavaScript";
@@ -71,11 +73,14 @@ router.get("/courses/:videoId", (req, res) => {
 ////////////////////////////////////Adding to favorites////////////////////////////////////////
 const mongoose = require("mongoose");
 const Video = require("../models/Video.model");
+const User = require("../models/User.model");
 
 router.post("/add-to-list", (req,res) => {
 
-  const {videoId} = req.body
+  const {videoId} = req.body;
+  const {currentUser} = req.session;
 
+  console.log("this is my userID:" + currentUser);
   console.log("this is my fav:" + videoId);
 
 const favVideo = Youtube.loadVideoById(videoId);
@@ -87,14 +92,21 @@ const favVideo = Youtube.loadVideoById(videoId);
 
         title: myVideo.snippet.title,
         videoId: myVideo.id,
-        thumbnail: myVideo.snippet.thumbnails.high.url
+        thumbnail: myVideo.snippet.thumbnails.high.url,
+        userId: currentUser,
 
       });
 
       newVideo
         .save()
         .then(() => {
-          res.redirect("/courses");
+          Video.find()
+            .populate("userId")
+
+            .then((videos) => {
+              
+            console.log(videos);
+            res.redirect("/courses")});
         })
         .catch((error) => {
           console.error("Error saving the video:", error);
