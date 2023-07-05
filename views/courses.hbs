@@ -1,5 +1,6 @@
 <div class="relative isolate px-6 pt-14 lg:px-8">
 
+
 <ul>
    {{#each video }}
 
@@ -8,7 +9,11 @@
         <p>Channel: {{this.snippet.channelTitle}}</p>
         <img src="{{this.snippet.thumbnails.high.url}}">
         <a href="/courses/{{this.id.videoId}}"><button>View</button></a>
-
+        
+        <form action="/add-to-list" method="POST"> 
+            <input type="hidden" name="videoId" value="{{this.id.videoId}}">
+            <button type="submit">Add to my list</button>
+        </form>
     </li>
     {{/each}}
 

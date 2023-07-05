@@ -7,10 +7,10 @@ const router = new Router();
 
 
 
-// const key = process.env.YOUTUBE_API_KEY;
-// const Youtube = new apiService(key);
-// const Youtube1 = new apiService(key);
-// const Youtube2 = new apiService(key);
+const key = process.env.YOUTUBE_API_KEY;
+const Youtube = new apiService(key);
+const Youtube1 = new apiService(key);
+const Youtube2 = new apiService(key);
 
 
 
@@ -46,10 +46,9 @@ router.get("/courses", (req, res) => {
 });
 
 
-
 router.get("/courses/:videoId", (req, res) => {
   const { videoId } = req.params;
-  //res.render("view-course");
+
   const showThisVideo = Youtube.loadVideoById(videoId);
 
   showThisVideo
@@ -63,6 +62,53 @@ router.get("/courses/:videoId", (req, res) => {
       res.status(500).send("An error occurred");
     });
 });
+
+
+
+
+
+////////////////////////////////////Adding to favorites////////////////////////////////////////
+const mongoose = require("mongoose");
+const Video = require("../models/Video.model");
+
+router.post("/add-to-list", (req,res) => {
+
+  const {videoId} = req.body
+
+  console.log("this is my fav:" + videoId);
+
+const favVideo = Youtube.loadVideoById(videoId);
+
+  favVideo
+    .then((video) => {
+      const myVideo = video.data.items[0];
+      const newVideo = new Video({
+
+        title: myVideo.snippet.title,
+        videoId: myVideo.id,
+        thumbnail: myVideo.snippet.thumbnails.high.url
+
+      });
+
+      newVideo
+        .save()
+        .then(() => {
+          res.redirect("/courses");
+        })
+        .catch((error) => {
+          console.error("Error saving the video:", error);
+          res.status(500).send("An error occurred");
+        });
+    })
+    .catch((error) => {
+      console.error("Error adding your video to favs:", error);
+      res.status(500).send("An error occurred");
+    });
+});  
+
+
+
+
 
 
 
