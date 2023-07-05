@@ -99,15 +99,22 @@ const favVideo = Youtube.loadVideoById(videoId);
 
       newVideo
         .save()
-        .then(() => {
-          Video.find()
-            .populate("userId")
-
+        .then(() => {Video.find()
             .then((videos) => {
-              
-            console.log(videos);
-            res.redirect("/courses")});
+              console.log(videos);
+              User.findByIdAndUpdate(currentUser, {
+                $push: { videos: newVideo._id },
+    })
+            .then((videos) => {
+
+              console.log(videos);
+              res.redirect("/courses");
+            });
+            
+
+           });
         })
+        
         .catch((error) => {
           console.error("Error saving the video:", error);
           res.status(500).send("An error occurred");
