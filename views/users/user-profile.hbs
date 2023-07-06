@@ -1,51 +1,5 @@
 {{#if userInSession}}
   <div class="relative isolate px-6 pt-14 top-16 lg:px-8 mx-auto max-w-4xl">
-    <div class="px-4 sm:px-0">
-      <h3 class="text-base font-semibold leading-7 text-gray-900">Welcome back {{userInSession.firstName}}!</h3>
-      <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">{{userInSession.email}}</p>
-    </div>
-    <div class="mt-6 border-t border-gray-100">
-      <dl class="divide-y divide-gray-100">
-        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900">Name</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{userInSession.firstName}}</dd>
-        </div>
-        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900">Email address</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{userInSession.email}}</dd>
-        </div>
-
-        <!-- favorites list -->
-
-
-
-      </dl>
-    </div>
-  </div>
-
-  <div class="relative isolate px-6 pt-14 top-16 lg:px-8 mx-auto max-w-4xl">
-    {{!-- DELETE --}}
-    {{userInSession.firstName}}
-    {{#each videos}}
-    <div>
-      <h1>{{title}}</h1>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/{{videoId}}" frameborder="0" allow="picture-in-picture" allowfullscreen></iframe>
-      <form action="/deletevideo/{{_id}}" method="POST">
-        <button type="submit">Delete Video</button>
-      </form>
-    </div>
-    {{/each}}
-  </div>
-{{else}}
-  <!-- Not logged in message -->
-  <div class="relative isolate px-6 pt-14 top-16 lg:px-8 mx-auto">
-    <h3>Please log in to view this content</h3>
-  </div>
-{{/if}}
-
- 
-{{#if userInSession}}
-  <div class="relative isolate px-6 pt-14 top-16 lg:px-8 mx-auto max-w-4xl">
 {{!-- DELETE --}}
 {{userInSession.firstName}}
     {{#each videos}}
