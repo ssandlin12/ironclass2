@@ -3,6 +3,7 @@ const router = new Router();
 const bcryptjs = require("bcryptjs");
 const saltRounds = 10;
 const User = require("../models/User.model");
+const Video = require("../models/Video.model");
 const mongoose = require("mongoose");
 
 //Get
@@ -10,7 +11,20 @@ router.get("/signup", (req, res) => res.render("signup"));
 
 //get userprofile
 router.get("/userProfile", (req, res) => {
-  res.render("users/user-profile", { userInSession: req.session.currentUser });
+  const { currentUser } = req.session;
+  console.log(currentUser);
+  const userId = currentUser._id;
+  User.findById(userId)
+    .populate("videos")
+    .then((user) => {
+      const videos = user.videos;
+      console.log("there are my videos: " + videos);
+      res.render("users/user-profile", { videos, userInSession: currentUser });
+    })
+    .catch((error) => {
+      console.error("Error retrieving user videos:", error);
+      res.status(500).send("An error occurred");
+    });
 });
 
 //get login
@@ -20,9 +34,9 @@ router.get("/login", (req, res) => res.render("login"));
 router.post("/login", (req, res, next) => {
   console.log("SESSION =====> ", req.session);
   const { email, password } = req.body;
-  
+
   if (email === "" || password === "") {
-     req.session.userId = userId;
+    req.session.userId = userId;
     res.render("login", {
       errorMessage: "Please enter both, email and password to login.",
     });
@@ -119,4 +133,31 @@ router.post("/logout", (req, res, next) => {
     res.redirect("/");
   });
 });
+
+// POST route to delete a specific user's videos from the database
+// router.post("/videos/:videoId", (req, res, next) => {
+//   const { videoId } = req.params;
+
+//   Video.findByIdAndDelete(videoId)
+//     .then(() => {
+//       // Video successfully deleted
+//       res.redirect("/deletevideo");
+//     })
+//     .catch((error) => next(error));
+// });
+
+router.post("/deletevideo/:videoId", (req, res, next) => {
+  const { videoId } = req.params;
+  const userId = req.session.currentUser._id;
+
+  Video.findByIdAndDelete(videoId)
+    .then(() => {
+      // Video successfully deleted
+      res.redirect("/userProfile");
+    })
+    .catch((error) => next(error));
+});
+
+router.get("/mylist", (req, res) => {});
+
 module.exports = router;
