@@ -44,3 +44,28 @@
     <h3>Please log in to view this content</h3>
   </div>
 {{/if}}
+
+ 
+{{#if userInSession}}
+  <div class="relative isolate px-6 pt-14 top-16 lg:px-8 mx-auto max-w-4xl">
+{{!-- DELETE --}}
+{{userInSession.firstName}}
+    {{#each videos}}
+    <div>
+      <h1>{{title}}</h1>
+
+       <iframe width="560" height="315" src="https://www.youtube.com/embed/{{videoId}}" frameborder="0"
+            allow=" picture-in-picture" allowfullscreen></iframe>
+
+      <form action="/deletevideo/{{_id}}" method="POST">
+        <button type="submit">Delete Video</button>
+      </form>
+    </div>
+    {{/each}}
+  </div>
+{{else}}
+  <!-- Not logged in message -->
+  <div class="relative isolate px-6 pt-14 top-16 lg:px-8 mx-auto">
+    <h3>Please log in to view this content</h3>
+  </div>
+{{/if}}

@@ -19,14 +19,9 @@ const videoSchema = new mongoose.Schema({
     // unique: true,
   },
 
-  // userId: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: "User",
-  //   required: true,
-  //   //unique: true,
-  // },
+
 });
 
-// videoSchema.index({ userId: 1, videoId: 1 }, { unique: true, sparse: true });
+
 
 module.exports = mongoose.model("Video", videoSchema);
