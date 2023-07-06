@@ -6,12 +6,19 @@ const router = new Router();
 
 const key = process.env.YOUTUBE_API_KEY;
 const Youtube = new apiService(key);
+const Youtube1 = new apiService(key);
+const Youtube2 = new apiService(key);
+
+
 
 
 router.get("/courses", (req, res) => {
   if (!req.session.currentUser) {
     res.redirect("/locked-courses");
   }
+  const searchThis = "Learn React With This One Project";
+  const searchThis1 = "100+ JavaScript Concepts you Need to Know";
+  const searchThis2 = "How to Code: Rectangular Collision Detection with JavaScript";
 
   const searchQueries = [
     "Learn React With This One Project",
@@ -19,11 +26,20 @@ router.get("/courses", (req, res) => {
     "How to Code: Rectangular Collision Detection with JavaScript",
   ];
 
-  Youtube.searchVideos(searchQueries, 1)
-    .then((responses) => {
-      const videos = responses.flatMap((response) => response.data.items);
-      res.render("courses", { videos });
+  Promise.all([searchResult, searchResult1, searchResult2])
+    .then((result) => {
+
+        const video = result[0].data.items;
+        const video2 = result[1].data.items;
+        const video1 = result[2].data.items;
+
+          //console.log(video1);
+          //console.log(video2);
+
+       res.render("courses", { video, video1, video2 });
     })
+
+
     .catch((error) => {
       console.error("Error searching videos:", error);
       res.status(500).send(error);
@@ -86,11 +102,29 @@ router.post("/add-to-list", (req, res) => {
           });
         })
 
+
         .catch((error) => {
           console.error("Error saving the video:", error);
           res.status(500).send("An error occurred");
         });
     })
+
+
+
+    // User.find(currentUser)
+    //   .then((res) => {
+    //    return res.findOne(currentUser.videos);
+    //   })
+
+    // .then((myVideos) => {
+    //  console.log("there are my videos: " + myVideos);
+    //   })
+
+
+
+
+
+
 
     .catch((error) => {
       console.error("Error adding your video to favs:", error);
