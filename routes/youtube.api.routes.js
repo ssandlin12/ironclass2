@@ -7,6 +7,7 @@ const router = new Router();
 const key = process.env.YOUTUBE_API_KEY;
 const Youtube = new apiService(key);
 
+
 router.get("/courses", (req, res) => {
   if (!req.session.currentUser) {
     res.redirect("/locked-courses");
@@ -25,6 +26,23 @@ router.get("/courses", (req, res) => {
     })
     .catch((error) => {
       console.error("Error searching videos:", error);
+      res.status(500).send(error);
+    });
+});
+
+router.get("/courses/:videoId", (req, res) => {
+  const { videoId } = req.params;
+
+  const showThisVideo = Youtube.loadVideoById(videoId);
+
+  showThisVideo
+    .then((video) => {
+      const myVideo = video.data.items[0].id;
+      res.render("view-course", { myVideo });
+    })
+
+    .catch((error) => {
+      console.error("Error displaying your video:", error);
       res.status(500).send(error);
     });
 });
@@ -73,15 +91,6 @@ router.post("/add-to-list", (req, res) => {
           res.status(500).send("An error occurred");
         });
     })
-
-    // User.find(currentUser)
-    //   .then((res) => {
-    //    return res.findOne(currentUser.videos);
-    //   })
-
-    // .then((myVideos) => {
-    //  console.log("there are my videos: " + myVideos);
-    //   })
 
     .catch((error) => {
       console.error("Error adding your video to favs:", error);

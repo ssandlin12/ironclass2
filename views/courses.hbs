@@ -47,13 +47,15 @@
         <div
           class="mt-10 flex items-center justify-center gap-x-6 lg:justify-start"
         >
+          <!--button to watch-->
           <a
             href="/courses/{{this.id.videoId}}"
             class="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >Watch</a>
-            <form action="/add-to-list" method="POST">
+          <!--button to add to list-->
+        <form class="h-2" action="/add-to-list" method="POST">
             <input type="hidden" name="videoId" value="{{this.id.videoId}}">
-            <button type="submit" class="text-sm font-semibold leading-6 text-white">Add to my list</button>
+            <button type="submit" class="text-sm font-semibold leading-6 text-white h-full">Add to my list</button>
         </form>
 
         </div>
