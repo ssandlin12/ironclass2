@@ -1,10 +1,4 @@
-/** @format */
-
-const app = require("../app");
 const axios = require("axios");
-const { Router } = require("express");
-const { youtube } = require("googleapis/build/src/apis/youtube");
-const routerOne = new Router();
 
 class ApiService {
   constructor(apiKey) {
@@ -16,23 +10,25 @@ class ApiService {
     });
   }
 
-  searchVideos = (query, maxResults) => {
-    return this.api.get("/search", {
-      params: {
-        q: query,
-        maxResults: maxResults,
-        part: "snippet",
-        type: "video",
-      },
+  searchVideos = (queries, maxResults) => {
+    const requests = queries.map((query) => {
+      return this.api.get("/search", {
+        params: {
+          q: query,
+          maxResults: maxResults,
+          part: "snippet",
+          type: "video",
+        },
+      });
     });
+
+    return axios.all(requests);
   };
 
   loadVideoById = (videoId) => {
     return this.api.get("/videos", {
       params: {
         id: videoId,
-        //startSeconds: startSeconds,
-        // endSeconds: endSeconds,
         part: "snippet",
         type: "video",
       },
