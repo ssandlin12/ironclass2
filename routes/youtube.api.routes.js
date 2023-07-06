@@ -83,7 +83,7 @@ router.post("/add-to-list", (req,res) => {
   console.log("this is my userID:" + currentUser);
   console.log("this is my fav:" + videoId);
 
-const favVideo = Youtube.loadVideoById(videoId);
+  const favVideo = Youtube.loadVideoById(videoId);
 
   favVideo
     .then((video) => {
@@ -99,29 +99,53 @@ const favVideo = Youtube.loadVideoById(videoId);
 
       newVideo
         .save()
+       
         .then(() => {
           Video.find()
-            .populate("userId")
+          
+            
 
             .then((videos) => {
-              
-            console.log(videos);
-            res.redirect("/courses")});
+              console.log(videos);
+              User.findByIdAndUpdate(currentUser, {
+                $push: { videos: newVideo._id },
+              }).then((videos) => {
+                // console.log(videos);
+                res.redirect("/courses");
+              });
+            });
         })
+
+        
+        
         .catch((error) => {
           console.error("Error saving the video:", error);
           res.status(500).send("An error occurred");
         });
     })
+
+
+
+    // User.find(currentUser)
+    //   .then((res) => {
+    //    return res.findOne(currentUser.videos);
+    //   })
+
+    // .then((myVideos) => {
+    //  console.log("there are my videos: " + myVideos);
+    //   })
+
+
+
+
+
+
+
     .catch((error) => {
       console.error("Error adding your video to favs:", error);
       res.status(500).send("An error occurred");
     });
 });  
-
-
-
-
 
 
 
