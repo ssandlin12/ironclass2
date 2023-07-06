@@ -16,31 +16,22 @@ const Youtube2 = new apiService(key);
 
 
 router.get("/courses", (req, res) => {
-  if(!req.session.currentUser) {
-    res.redirect("/locked-courses")
+  if (!req.session.currentUser) {
+    res.redirect("/locked-courses");
   }
   const searchThis = "Learn React With This One Project";
   const searchThis1 = "100+ JavaScript Concepts you Need to Know";
   const searchThis2 = "How to Code: Rectangular Collision Detection with JavaScript";
 
-  const searchResult = Youtube.searchVideos(searchThis, 1);
-  const searchResult1 = Youtube1.searchVideos(searchThis1, 1);
-  const searchResult2 = Youtube2.searchVideos(searchThis2, 1);
-
-  Promise.all([searchResult, searchResult1, searchResult2])
+  Promise.all([
+    Youtube.searchVideos(searchThis, 1),
+    Youtube1.searchVideos(searchThis1, 1),
+    Youtube2.searchVideos(searchThis2, 1)
+  ])
     .then((result) => {
-
-        const video = result[0].data.items;
-        const video2 = result[1].data.items;
-        const video1 = result[2].data.items;
-
-          //console.log(video1);
-          //console.log(video2);
-
-       res.render("courses", { video, video1, video2 });
+      const videos = result.flatMap((response) => response.data.items);
+      res.render("courses", { videos });
     })
-
-
     .catch((error) => {
       console.error("Error searching videos:", error);
       res.status(500).send("An error occurred");
@@ -99,11 +90,11 @@ router.post("/add-to-list", (req,res) => {
 
       newVideo
         .save()
-       
+
         .then(() => {
           Video.find()
-          
-            
+
+
 
             .then((videos) => {
               console.log(videos);
@@ -116,8 +107,8 @@ router.post("/add-to-list", (req,res) => {
             });
         })
 
-        
-        
+
+
         .catch((error) => {
           console.error("Error saving the video:", error);
           res.status(500).send("An error occurred");
