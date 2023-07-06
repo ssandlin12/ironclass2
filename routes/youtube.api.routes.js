@@ -10,8 +10,8 @@ const Youtube1 = new apiService(key);
 const Youtube2 = new apiService(key);
 
 router.get("/courses", (req, res) => {
-  if (!req.session.currentUser) {
-    res.redirect("/dummyCourses");
+  if(!req.session.currentUser) {
+    res.redirect("/locked-courses")
   }
   const searchThis = "Learn React With This One Project";
   const searchThis1 = "100+ JavaScript Concepts you Need to Know";
@@ -95,6 +95,7 @@ router.post("/add-to-list", (req, res) => {
             });
           });
         })
+
 
         .catch((error) => {
           console.error("Error saving the video:", error);

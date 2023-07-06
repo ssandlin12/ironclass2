@@ -6,8 +6,8 @@ router.get("/", (req, res, next) => {
   res.render("index");
 });
 
-router.get("/dummyCourses", (req, res, next) => {
-  res.render("dummyCourses");
+router.get("/locked-courses", (req, res, next) => {
+  res.render("locked-courses");
 });
 
 router.get("/meet-teachers", (req, res, next) => {
