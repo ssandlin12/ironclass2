@@ -17,7 +17,7 @@ const Youtube2 = new apiService(key);
 
 router.get("/courses", (req, res) => {
   if(!req.session.currentUser) {
-    res.redirect("/dummyCourses")
+    res.redirect("/locked-courses")
   }
   const searchThis = "Learn React With This One Project";
   const searchThis1 = "100+ JavaScript Concepts you Need to Know";
@@ -104,7 +104,7 @@ const favVideo = Youtube.loadVideoById(videoId);
             .populate("userId")
 
             .then((videos) => {
-              
+
             console.log(videos);
             res.redirect("/courses")});
         })
@@ -117,7 +117,7 @@ const favVideo = Youtube.loadVideoById(videoId);
       console.error("Error adding your video to favs:", error);
       res.status(500).send("An error occurred");
     });
-});  
+});
 
 
 
