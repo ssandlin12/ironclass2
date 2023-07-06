@@ -11,7 +11,7 @@ const Youtube2 = new apiService(key);
 
 router.get("/courses", (req, res) => {
   if (!req.session.currentUser) {
-    res.redirect("/dummyCourses");
+    res.redirect("/locked-courses");
   }
   const searchThis = "Learn React With This One Project";
   const searchThis1 = "100+ JavaScript Concepts you Need to Know";

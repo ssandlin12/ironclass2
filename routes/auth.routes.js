@@ -149,13 +149,19 @@ router.post("/logout", (req, res, next) => {
 router.post("/deletevideo/:videoId", (req, res, next) => {
   const { videoId } = req.params;
   const userId = req.session.currentUser._id;
+  User.findByIdAndUpdate(userId, {
+    $pull: { videos: videoId },
+  }).then((resp) => {
+    console.log(resp);
+    res.redirect("/courses");
+  });
 
-  Video.findByIdAndDelete(videoId)
-    .then(() => {
-      // Video successfully deleted
-      res.redirect("/userProfile");
-    })
-    .catch((error) => next(error));
+  // Video.findByIdAndDelete(videoId)
+  //   .then(() => {
+  //     // Video successfully deleted
+  //     res.redirect("/userProfile");
+  //   })
+  //   .catch((error) => next(error));
 });
 
 router.get("/mylist", (req, res) => {});
