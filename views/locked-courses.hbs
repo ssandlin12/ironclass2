@@ -9,8 +9,10 @@
     </div>
     </div>
   </div>
-</div>
-  <div class="mx-auto max-w-7xl py-0 sm:px-6 sm:py-0 lg:px-8">
+
+
+   {{#each video }}
+  <div class="mx-auto max-w-7xl py-0 sm:px-6 sm:py-0 lg:px-8 mb-6 lg:mb-12">
     <div
       class="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0"
     >
@@ -38,8 +40,8 @@
       >
         <h2
           class="text-3xl font-bold tracking-tight text-white sm:text-4xl"
-        >Learn Javascript Classes:<br />Build a Helicopter Game.</h2>
-        <p class="mt-6 text-lg leading-8 text-gray-300">Step-by-step guidance for game development, from controls to visuals. Unleash your creativity and take your skills to new heights!</p>
+        >{{this.snippet.title}}:<br /></h2>
+        <p class="mt-6 text-lg leading-8 text-gray-300">{{this.snippet.description}}</p>
         <div
           class="mt-10 flex items-center justify-center gap-x-6 lg:justify-start"
         >
@@ -53,7 +55,7 @@
       <div class="relative mt-16 h-80 lg:mt-8">
         <img
           class="absolute left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10"
-          src="/images/francis.png"
+          src="/images/lock.png"
           alt="App screenshot"
           width="1824"
           height="1080"
@@ -61,8 +63,12 @@
       </div>
     </div>
   </div>
+   {{/each}}
 
-  <div class="mx-auto max-w-7xl py-12 sm:px-6 sm:py-12 lg:px-8">
+
+
+   {{#each video1 }}
+  <div class="mx-auto max-w-7xl py-0 sm:px-6 sm:py-0 lg:px-8 mb-6 lg:mb-12">
     <div
       class="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0"
     >
@@ -81,7 +87,7 @@
         <defs>
           <radialGradient id="759c1415-0410-454c-8f7c-9a820de03641">
             <stop stop-color="#81E7FE" />
-            <stop offset="1" stop-color="#14C0E5" />
+            <stop offset="1" stop-color="#14C0E5"/>
           </radialGradient>
         </defs>
       </svg>
@@ -90,10 +96,8 @@
       >
         <h2
           class="text-3xl font-bold tracking-tight text-white sm:text-4xl"
-        >Boost your productivity.<br />Start using our app today.</h2>
-        <p class="mt-6 text-lg leading-8 text-gray-300">Ac euismod vel sit
-          maecenas id pellentesque eu sed consectetur. Malesuada adipiscing
-          sagittis vel nulla.</p>
+        >{{this.snippet.title}}:<br /></h2>
+        <p class="mt-6 text-lg leading-8 text-gray-300">{{this.snippet.description}}</p>
         <div
           class="mt-10 flex items-center justify-center gap-x-6 lg:justify-start"
         >
@@ -101,15 +105,13 @@
             href="/login"
             class="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >Login to view</a>
-          <a href="#" class="text-sm font-semibold leading-6 text-white">Learn
-            more
-            <span aria-hidden="true">→</span></a>
+
         </div>
       </div>
       <div class="relative mt-16 h-80 lg:mt-8">
         <img
           class="absolute left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10"
-          src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
+          src="/images/lock.png"
           alt="App screenshot"
           width="1824"
           height="1080"
@@ -117,10 +119,12 @@
       </div>
     </div>
   </div>
-</div>
+   {{/each}}
 
-<div class="bg-white">
-  <div class="mx-auto max-w-7xl py-0 sm:px-6 sm:py-0 lg:px-8">
+
+
+   {{#each video2 }}
+  <div class="mx-auto max-w-7xl py-0 sm:px-6 sm:py-0 lg:px-8 mb-6 lg:mb-12">
     <div
       class="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0"
     >
@@ -139,7 +143,7 @@
         <defs>
           <radialGradient id="759c1415-0410-454c-8f7c-9a820de03641">
             <stop stop-color="#81E7FE" />
-            <stop offset="1" stop-color="#14C0E5" />
+            <stop offset="1" stop-color="#14C0E5"/>
           </radialGradient>
         </defs>
       </svg>
@@ -148,10 +152,8 @@
       >
         <h2
           class="text-3xl font-bold tracking-tight text-white sm:text-4xl"
-        >Boost your productivity.<br />Start using our app today.</h2>
-        <p class="mt-6 text-lg leading-8 text-gray-300">Ac euismod vel sit
-          maecenas id pellentesque eu sed consectetur. Malesuada adipiscing
-          sagittis vel nulla.</p>
+        >{{this.snippet.title}}:<br /></h2>
+        <p class="mt-6 text-lg leading-8 text-gray-300">{{this.snippet.description}}</p>
         <div
           class="mt-10 flex items-center justify-center gap-x-6 lg:justify-start"
         >
@@ -159,15 +161,13 @@
             href="/login"
             class="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >Login to view</a>
-          <a href="#" class="text-sm font-semibold leading-6 text-white">Learn
-            more
-            <span aria-hidden="true">→</span></a>
+
         </div>
       </div>
       <div class="relative mt-16 h-80 lg:mt-8">
         <img
           class="absolute left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10"
-          src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
+          src="/images/lock.png"
           alt="App screenshot"
           width="1824"
           height="1080"
@@ -175,7 +175,4 @@
       </div>
     </div>
   </div>
-</div>
-</div>
-
-    <div class="h-40"></div>
+   {{/each}}
