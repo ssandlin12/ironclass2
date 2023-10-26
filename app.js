@@ -39,17 +39,17 @@ const projectName = "ironclass2";
 app.locals.appTitle = `${capitalize(projectName)} created with IronLauncher`;
 
 function isAuthenticated(req, res, next) {
-    if (req.session.currentUser) {
-      res.locals.userInSession = req.session.currentUser; // Add user data to response locals
-      next();
-    } else {
-      res.locals.userInSession = null; // If not logged in, set it to null
-      next();
-    }
+  if (req.session.currentUser) {
+    res.locals.userInSession = req.session.currentUser; // Add user data to response locals
+    next();
+  } else {
+    res.locals.userInSession = null; // If not logged in, set it to null
+    next();
   }
+}
 
-  // Use the middleware for all routes
-  app.use(isAuthenticated);
+// Use the middleware for all routes
+app.use(isAuthenticated);
 
 // 👇 Start handling routes here
 const indexRoutes = require("./routes/index.routes");
